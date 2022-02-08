@@ -9,6 +9,13 @@ uvicorn = {extras = ["standard"], version = "*"}
 arq = "*"
 
 [dev-packages]
+black = "*"
+flake8 = "*"
+rope = "*"
+isort = "*"
 
 [requires]
 python_version = "3.9"
+
+[pipenv]
+allow_prereleases = true
