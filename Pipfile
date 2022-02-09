@@ -6,7 +6,10 @@ name = "pypi"
 [packages]
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
-arq = "*"
+beanie = "*"
+aioredis = {extras = ["hiredis"], version = "*"}
+loguru = "*"
+nanoid = "*"
 
 [dev-packages]
 black = "*"
