@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     REDIS_URL: AnyUrl
     REDIS_TLS_URL: AnyUrl
     MONGODB_URL: AnyUrl
+    REDIS_OM_URL: AnyUrl
 
 
 @lru_cache
