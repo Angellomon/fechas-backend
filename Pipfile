@@ -7,9 +7,11 @@ name = "pypi"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 beanie = "*"
-aioredis = {extras = ["hiredis"], version = "*"}
 loguru = "*"
 nanoid = "*"
+fastapi-cache2 = "*"
+aioredis = "*"
+dnspython = "*"
 
 [dev-packages]
 black = "*"
