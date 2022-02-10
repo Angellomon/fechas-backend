@@ -1,24 +1,35 @@
-from datetime import datetime
-from typing import List
+from datetime import date, datetime
+from typing import Any, List, Union
 
-import nanoid
 from beanie import Document
-from pydantic import BaseModel
+from pydantic.class_validators import validator
 from pydantic.fields import Field
+from pydantic.main import BaseModel
 
 default_now = Field(default_factory=lambda: datetime.now())
 
+default_nombre = "__base__"
 
-class ConFechasAbiertas:
+
+def parse_fecha(fecha: Union[str, datetime, date]):
+    if isinstance(fecha, (datetime, date)):
+        return fecha
+
+    try:
+        return datetime.strptime(fecha, "%Y-%m-%d")
+    except:
+        return datetime.fromisoformat(fecha)
+
+
+class ConFechas(BaseModel):
     fechas_abiertas: List[datetime] = []
-
-
-class ConFechasCerradas:
     fechas_cerradas: List[datetime] = []
+
+    @validator("fechas_abiertas", "fechas_cerradas", pre=True)
+    def validar_fechas(cls, value: Any):
+        return [parse_fecha(fecha) for fecha in value]
 
 
 class DBModel(Document):
-    id: str = Field(default_factory=lambda: nanoid())
-
     created_at: datetime = default_now
     updated_at: datetime = default_now
