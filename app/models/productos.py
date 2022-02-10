@@ -1,6 +1,22 @@
-from app.models.utils import ConFechasAbiertas, ConFechasCerradas, DBModel
+from app.models.utils import ConFechas, DBModel
 
 
-class Producto(DBModel, ConFechasAbiertas, ConFechasCerradas):
-
+class _ProductoBase(ConFechas):
     nombre: str
+
+
+class ProductoUpdate(ConFechas):
+    ...
+
+
+class ProductoCreate(_ProductoBase):
+    ...
+
+
+class Producto(_ProductoBase):
+    ...
+
+
+class ProductoDB(Producto, DBModel):
+    class Collection:
+        indexes = ["nombre"]
